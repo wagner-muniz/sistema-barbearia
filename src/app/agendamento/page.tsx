@@ -483,39 +483,12 @@ export default function AgendamentoPage() {
                   onSelect={setSelected}
                   locale={ptBR}
                   className="text-white"
-                  styles={{
-                    caption: {
-                      color: "#C2994B",
-                    },
-
-                    head_cell: {
-                      color: "#C2994B",
-                    },
-
-                    day: {
-                      color: "white",
-                    },
-
-                    nav_button: {
-                      color: "#C2994B",
-                      background:
-                        "transparent",
-                      border: "none",
-                    },
-
-                    chevron: {
-                      fill: "#C2994B",
-                    },
-                  }}
                   modifiersStyles={{
                     selected: {
-                      backgroundColor:
-                        "#C2994B",
+                      backgroundColor: "#C2994B",
                       color: "#000",
-                      borderRadius:
-                        "9999px",
+                      borderRadius: "9999px",
                     },
-
                     today: {
                       color: "#C2994B",
                       fontWeight: "bold",
