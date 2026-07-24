@@ -1,133 +1,174 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
-export default function LoginPage() {
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const pathname = usePathname();
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [carregando, setCarregando] = useState(false);
+  const [menuAberto, setMenuAberto] = useState(false);
+  const [carregando, setCarregando] = useState(true);
 
-  async function fazerLogin(e: React.FormEvent) {
-    e.preventDefault();
+  useEffect(() => {
+    async function verificarSessao() {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
 
-    if (!email || !senha) {
-      alert("Preencha todos os campos");
-      return;
+      if (!session) {
+        router.replace("/login");
+        return;
+      }
+
+      setCarregando(false);
     }
 
-    setCarregando(true);
+    verificarSessao();
+  }, [router]);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password: senha,
-    });
+  async function sair() {
+    const { error } = await supabase.auth.signOut();
 
     if (error) {
-      console.error(error);
-      alert("E-mail ou senha incorretos");
-      setCarregando(false);
+      console.error("Erro ao sair:", error);
+      alert("Erro ao sair da conta");
       return;
     }
 
-    alert("Login realizado com sucesso!");
-
-    router.push("/admin");
+    router.push("/login");
     router.refresh();
   }
 
+  const menu = [
+    {
+      nome: "📊 Dashboard",
+      rota: "/admin",
+    },
+    {
+      nome: "🗓️ Agendamentos",
+      rota: "/admin/agendamentos",
+    },
+    {
+      nome: "✂️ Serviços",
+      rota: "/admin/servico",
+    },
+    {
+      nome: "👥 Clientes",
+      rota: "/admin/clientes",
+    },
+    {
+      nome: "🚫 Datas Bloqueadas",
+      rota: "/admin/bloqueios",
+    },
+    {
+      nome: "📈 Relatórios",
+      rota: "/admin/relatorios",
+    },
+  ];
+
+  if (carregando) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#070705] text-white">
+        Verificando acesso...
+      </div>
+    );
+  }
+
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#070705] px-6 text-white">
+    <div className="flex min-h-screen bg-[#070705] text-white">
 
-      <div className="w-full max-w-md rounded-2xl border border-[#C2994B]/20 bg-[#111] p-8 shadow-2xl">
+      {/* Fundo escuro */}
+      {menuAberto && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 lg:hidden"
+          onClick={() => setMenuAberto(false)}
+        />
+      )}
 
-        {/* LOGO */}
-        <div className="mb-8 text-center">
-
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#C2994B] text-3xl font-bold text-black">
-            B
-          </div>
-
-          <h1 className="text-3xl font-bold text-[#C2994B]">
+      {/* Menu lateral */}
+      <aside
+        className={`fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r border-[#C2994B]/20 bg-[#111] transition-transform duration-300 lg:static lg:translate-x-0 ${
+          menuAberto ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="border-b border-[#C2994B]/20 p-6">
+          <h1 className="text-xl font-bold text-[#C2994B]">
             Barber Dev
           </h1>
 
-          <p className="mt-2 text-sm text-gray-400">
-            Acesse o painel administrativo
+          <p className="text-xs text-gray-400">
+            Painel Administrativo
           </p>
-
         </div>
 
-        {/* FORMULÁRIO */}
-        <form
-          onSubmit={fazerLogin}
-          className="space-y-5"
-        >
+        <nav className="flex-1 space-y-2 p-4">
+          {menu.map((item) => {
+            const ativo = pathname === item.rota;
 
-          {/* EMAIL */}
-          <div className="space-y-2">
+            return (
+              <Link
+                key={item.rota}
+                href={item.rota}
+                onClick={() => setMenuAberto(false)}
+                className={`block rounded-lg px-4 py-3 transition ${
+                  ativo
+                    ? "bg-[#C2994B] font-semibold text-black"
+                    : "text-gray-300 hover:bg-[#222]"
+                }`}
+              >
+                {item.nome}
+              </Link>
+            );
+          })}
+        </nav>
 
-            <label
-              htmlFor="email"
-              className="text-sm font-medium text-[#C2994B]"
-            >
-              E-mail
-            </label>
-
-            <input
-              id="email"
-              type="email"
-              placeholder="admin@email.com"
-              value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
-              className="w-full rounded-lg border border-white/10 bg-[#0b0b0b] p-3 text-white outline-none transition focus:border-[#C2994B]"
-            />
-
-          </div>
-
-          {/* SENHA */}
-          <div className="space-y-2">
-
-            <label
-              htmlFor="senha"
-              className="text-sm font-medium text-[#C2994B]"
-            >
-              Senha
-            </label>
-
-            <input
-              id="senha"
-              type="password"
-              placeholder="Digite sua senha"
-              value={senha}
-              onChange={(e) =>
-                setSenha(e.target.value)
-              }
-              className="w-full rounded-lg border border-white/10 bg-[#0b0b0b] p-3 text-white outline-none transition focus:border-[#C2994B]"
-            />
-
-          </div>
-
-          {/* BOTÃO */}
+        <div className="border-t border-[#C2994B]/20 p-4">
           <button
-            type="submit"
-            disabled={carregando}
-            className="w-full rounded-lg bg-[#C2994B] py-3 font-semibold text-black transition hover:bg-[#d4aa5a] disabled:cursor-not-allowed disabled:opacity-50"
+            type="button"
+            onClick={sair}
+            className="w-full rounded-lg bg-red-600 px-4 py-3 font-semibold text-white transition hover:bg-red-700"
           >
-            {carregando
-              ? "Entrando..."
-              : "Entrar"}
+            Sair
+          </button>
+        </div>
+      </aside>
+
+      {/* Área principal */}
+      <main className="flex-1">
+
+        <header className="flex h-16 items-center justify-between border-b border-[#C2994B]/20 bg-[#111] px-4 lg:px-8">
+
+          {/* Botão hambúrguer */}
+          <button
+            onClick={() => setMenuAberto(!menuAberto)}
+            className="rounded-md border border-[#C2994B] px-3 py-2 text-[#C2994B] lg:hidden"
+          >
+            ☰
           </button>
 
-        </form>
+          <h2 className="font-semibold text-white">
+            Sistema de Agendamento
+          </h2>
 
-      </div>
+          <span className="text-sm text-gray-400">
+            Administrador
+          </span>
 
-    </main>
+        </header>
+
+        <section className="p-4 lg:p-8">
+          {children}
+        </section>
+
+      </main>
+
+    </div>
   );
-}
+}}
