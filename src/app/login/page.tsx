@@ -33,9 +33,7 @@ export default function LoginPage() {
       return;
     }
 
-    alert("Login realizado com sucesso!");
-
-    router.push("/admin");
+    router.replace("/admin");
     router.refresh();
   }
 
