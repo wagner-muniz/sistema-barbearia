@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 export default function AdminLayout({
@@ -11,6 +12,7 @@ export default function AdminLayout({
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [menuAberto, setMenuAberto] = useState(false);
 
   async function sair() {
     const { error } = await supabase.auth.signOut();
@@ -56,22 +58,30 @@ export default function AdminLayout({
     <div className="flex min-h-screen bg-[#070705] text-white">
 
       {/* MENU LATERAL */}
-      <aside className="flex w-64 flex-col border-r border-[#C2994B]/20 bg-[#111]">
+      <aside className="flex w-64 flex-col border-r border-[#C2994B]/20 bg-[#111] lg:w-64 lg:block">
 
-        {/* LOGO */}
-        <div className="border-b border-[#C2994B]/20 p-6">
-          <h1 className="text-xl font-bold text-[#C2994B]">
-            Barber Dev
-          </h1>
-
-          <p className="text-xs text-gray-400">
-            Painel Administrativo
-          </p>
+        <div className="flex items-center justify-between border-b border-[#C2994B]/20 p-6 lg:block">
+          <div>
+            <h1 className="text-xl font-bold text-[#C2994B]">Barber Dev</h1>
+            <p className="text-xs text-gray-400">Painel Administrativo</p>
+          </div>
+          <button
+            type="button"
+            className="block rounded-lg border border-[#C2994B]/20 bg-[#111] p-2 text-white hover:bg-[#222] lg:hidden"
+            onClick={() => setMenuAberto((prev) => !prev)}
+            aria-label="Abrir menu"
+          >
+            <span className="block h-0.5 w-6 bg-white" />
+            <span className="my-1 block h-0.5 w-6 bg-white" />
+            <span className="block h-0.5 w-6 bg-white" />
+          </button>
         </div>
 
-        {/* MENU */}
-        <nav className="flex-1 space-y-2 p-4">
-
+        <nav
+          className={`flex-1 space-y-2 p-4 lg:block ${
+            menuAberto ? "block" : "hidden"
+          }`}
+        >
           {menu.map((item) => {
             const ativo = pathname === item.rota;
 
@@ -84,17 +94,15 @@ export default function AdminLayout({
                     ? "bg-[#C2994B] font-semibold text-black"
                     : "text-gray-300 hover:bg-[#222]"
                 }`}
+                onClick={() => setMenuAberto(false)}
               >
                 {item.nome}
               </Link>
             );
           })}
-
         </nav>
 
-        {/* BOTÃO SAIR */}
-        <div className="border-t border-[#C2994B]/20 p-4">
-
+        <div className="border-t border-[#C2994B]/20 p-4 lg:block">
           <button
             type="button"
             onClick={sair}
@@ -102,7 +110,6 @@ export default function AdminLayout({
           >
             Sair
           </button>
-
         </div>
 
       </aside>
@@ -112,13 +119,9 @@ export default function AdminLayout({
 
         <header className="flex h-16 items-center justify-between border-b border-[#C2994B]/20 bg-[#111] px-8">
 
-          <h2 className="font-semibold text-white">
-            Sistema de Agendamento
-          </h2>
+          <h2 className="font-semibold text-white">Sistema de Agendamento</h2>
 
-          <span className="text-sm text-gray-400">
-            Administrador
-          </span>
+          <span className="text-sm text-gray-400">Administrador</span>
 
         </header>
 
