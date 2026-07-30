@@ -55,33 +55,37 @@ export default function AdminLayout({
   ];
 
   return (
-    <div className="flex min-h-screen bg-[#070705] text-white">
+    <div className="relative flex min-h-screen bg-[#070705] text-white">
+      {menuAberto ? (
+        <button
+          type="button"
+          className="fixed inset-0 z-40 bg-black/70 lg:hidden"
+          onClick={() => setMenuAberto(false)}
+          aria-label="Fechar menu"
+        />
+      ) : null}
 
-      {/* MENU LATERAL */}
-      <aside className="flex w-64 flex-col border-r border-[#C2994B]/20 bg-[#111] lg:w-64 lg:block">
-
-        <div className="flex items-center justify-between border-b border-[#C2994B]/20 p-6 lg:block">
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-[#C2994B]/20 bg-[#111] transition-transform duration-300 lg:static lg:w-64 lg:translate-x-0 ${
+          menuAberto ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex items-center justify-between border-b border-[#C2994B]/20 p-6">
           <div>
             <h1 className="text-xl font-bold text-[#C2994B]">Barber Dev</h1>
             <p className="text-xs text-gray-400">Painel Administrativo</p>
           </div>
           <button
             type="button"
-            className="block rounded-lg border border-[#C2994B]/20 bg-[#111] p-2 text-white hover:bg-[#222] lg:hidden"
-            onClick={() => setMenuAberto((prev) => !prev)}
-            aria-label="Abrir menu"
+            className="rounded-lg border border-[#C2994B]/20 bg-[#111] p-2 text-white hover:bg-[#222] lg:hidden"
+            onClick={() => setMenuAberto(false)}
+            aria-label="Fechar menu"
           >
-            <span className="block h-0.5 w-6 bg-white" />
-            <span className="my-1 block h-0.5 w-6 bg-white" />
-            <span className="block h-0.5 w-6 bg-white" />
+            ✕
           </button>
         </div>
 
-        <nav
-          className={`flex-1 space-y-2 p-4 lg:block ${
-            menuAberto ? "block" : "hidden"
-          }`}
-        >
+        <nav className="flex-1 space-y-2 p-4">
           {menu.map((item) => {
             const ativo = pathname === item.rota;
 
@@ -102,7 +106,7 @@ export default function AdminLayout({
           })}
         </nav>
 
-        <div className="border-t border-[#C2994B]/20 p-4 lg:block">
+        <div className="border-t border-[#C2994B]/20 p-4">
           <button
             type="button"
             onClick={sair}
@@ -111,27 +115,29 @@ export default function AdminLayout({
             Sair
           </button>
         </div>
-
       </aside>
 
-      {/* ÁREA PRINCIPAL */}
-      <main className="flex-1">
-
-        <header className="flex h-16 items-center justify-between border-b border-[#C2994B]/20 bg-[#111] px-8">
-
-          <h2 className="font-semibold text-white">Sistema de Agendamento</h2>
+      <main className="flex-1 lg:ml-0">
+        <header className="flex h-16 items-center justify-between border-b border-[#C2994B]/20 bg-[#111] px-4 sm:px-8">
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              className="rounded-lg border border-[#C2994B]/20 bg-[#111] p-2 text-white hover:bg-[#222] lg:hidden"
+              onClick={() => setMenuAberto(true)}
+              aria-label="Abrir menu"
+            >
+              <span className="block h-0.5 w-6 bg-white" />
+              <span className="my-1 block h-0.5 w-6 bg-white" />
+              <span className="block h-0.5 w-6 bg-white" />
+            </button>
+            <h2 className="font-semibold text-white">Sistema de Agendamento</h2>
+          </div>
 
           <span className="text-sm text-gray-400">Administrador</span>
-
         </header>
 
-        <section className="p-8">
-          {children}
-        </section>
-
+        <section className="p-8">{children}</section>
       </main>
-
     </div>
-    
   );
 }
