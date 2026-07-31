@@ -37,8 +37,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   if (isAdminRoute(request.nextUrl.pathname) && (error || !user)) {
-    const redirectUrl = new URL("/login", request.url);
-    return NextResponse.redirect(redirectUrl);
+    return response;
   }
 
   return response;

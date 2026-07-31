@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
@@ -10,6 +10,26 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [carregando, setCarregando] = useState(false);
+
+  useEffect(() => {
+    let ativo = true;
+
+    async function verificarSessao() {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (ativo && session) {
+        router.replace("/admin");
+      }
+    }
+
+    verificarSessao();
+
+    return () => {
+      ativo = false;
+    };
+  }, [router]);
 
   async function fazerLogin(e: React.FormEvent) {
     e.preventDefault();

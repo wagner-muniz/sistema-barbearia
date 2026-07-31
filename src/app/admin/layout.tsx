@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 export default function AdminLayout({
@@ -13,6 +13,37 @@ export default function AdminLayout({
   const pathname = usePathname();
   const router = useRouter();
   const [menuAberto, setMenuAberto] = useState(false);
+
+  useEffect(() => {
+    let ativo = true;
+
+    async function verificarSessao() {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (!ativo) return;
+
+      if (!session) {
+        router.replace("/login");
+      }
+    }
+
+    verificarSessao();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        if (!session) {
+          router.replace("/login");
+        }
+      }
+    );
+
+    return () => {
+      ativo = false;
+      subscription.unsubscribe();
+    };
+  }, [router]);
 
   async function sair() {
     const { error } = await supabase.auth.signOut();
@@ -34,7 +65,7 @@ export default function AdminLayout({
     },
     {
       nome: "🗓️ Agendamentos",
-      rota: "/admin/agendamentos",
+      rota: "/admin/agendamento",
     },
     {
       nome: "✂️ Serviços",
