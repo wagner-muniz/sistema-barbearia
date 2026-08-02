@@ -5,8 +5,8 @@ import { ArrowRight, Globe, Users, Phone } from "lucide-react";
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#070705] text-white">
-      <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col px-6 lg:px-12">
-        <header className="flex h-24 items-center justify-between">
+      <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col px-4 py-4 sm:px-6 lg:px-12 lg:py-0">
+        <header className="flex flex-col gap-4 py-2 sm:h-24 sm:flex-row sm:items-center sm:justify-between sm:py-0">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#C2994B]/40 bg-[#1A1918]/80 text-[#C2994B] shadow-[0_0_0_1px_rgba(194,153,75,0.18)]">
               <span className="font-bold">B</span>
@@ -16,7 +16,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex items-center pt-1 gap-4 text-[#C2994B]">
+          <div className="flex flex-wrap items-center gap-3 pt-1 text-[#C2994B] sm:gap-4">
             <a href="https://www.instagram.com/SeuBarbeiro" target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-full border border-[#C2994B]/20 bg-white/5 px-3 py-2 text-sm text-[#C2994B] transition hover:bg-[#C2994B]/10" aria-label="Instagram">
               <Users className="h-4 w-4" />
               Instagram
@@ -28,7 +28,7 @@ export default function Home() {
           </div>
         </header>
 
-        <main className="flex-1 grid items-center gap-16 lg:grid-cols-[1fr_1fr]">          
+        <main className="flex-1 grid items-center gap-8 py-6 sm:gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16 lg:py-0">          
           <section className="max-w-2xl space-y-8">
             <div className="inline-flex items-center gap-3 rounded-full bg-white/5 px-4 py-2 text-sm text-white/80 ring-1 ring-white/10 backdrop-blur-sm">
               <span className="h-2 w-2 rounded-full bg-[#C2994B]" />
@@ -36,7 +36,7 @@ export default function Home() {
             </div>
 
             <div className="space-y-5">
-              <h1 className="max-w-3xl text-5xl font-bold leading-[1.05] text-white sm:text-6xl">
+              <h1 className="max-w-3xl text-4xl font-bold leading-[1.05] text-white sm:text-5xl lg:text-6xl">
                 Cuidar do seu visual é nossa <span className="text-[#C2994B]">missão</span>.
               </h1>
               <p className="max-w-xl text-base leading-8 text-white/75 sm:text-lg">
@@ -84,7 +84,7 @@ export default function Home() {
             </div> */}
           </section>
 
-          <section className="relative flex min-h-[560px] items-center justify-center rounded-[2rem] bg-gradient-to-br from-[#141412] via-[#1f1f1c] to-[#141412] p-6 shadow-[0_50px_120px_-60px_rgba(0,0,0,0.9)]">
+          <section className="relative flex min-h-[320px] items-center justify-center rounded-[2rem] bg-gradient-to-br from-[#141412] via-[#1f1f1c] to-[#141412] p-4 shadow-[0_50px_120px_-60px_rgba(0,0,0,0.9)] sm:min-h-[420px] sm:p-6 lg:min-h-[560px]">
             {/* <div className="absolute -left-8 top-10 hidden rounded-full border border-[#C2994B]/20 bg-[#C2994B]/10 p-4 text-[#C2994B] sm:flex">
               <div className="text-xs uppercase tracking-[0.3em] text-[#C2994B]">Mais procurado</div>
             </div> */}
@@ -95,7 +95,7 @@ export default function Home() {
                   alt="Barbeiro cortando cabelo"
                   width={700}
                   height={850}
-                  className="h-[680px] w-full object-cover object-top"
+                  className="h-[320px] w-full object-cover object-top sm:h-[480px] lg:h-[680px]"
                   priority
                 />
               </div>

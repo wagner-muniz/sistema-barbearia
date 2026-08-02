@@ -213,23 +213,23 @@ export default function RelatoriosPage() {
   }
 
   return (
-    <div>
+    <div className="w-full min-w-0 overflow-x-hidden">
       {/* CABEÇALHO */}
 
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-4xl font-bold text-[#C2994B]">
+          <h1 className="text-3xl font-bold text-[#C2994B] sm:text-4xl">
             Relatórios
           </h1>
 
-          <p className="mt-2 text-gray-400">
+          <p className="mt-2 text-sm text-gray-400 sm:text-base">
             Acompanhe os dados da sua barbearia
           </p>
         </div>
 
         <button
           onClick={carregarDados}
-          className="rounded-lg bg-[#C2994B] px-5 py-3 font-semibold text-black transition hover:bg-[#d4aa5a]"
+          className="w-full rounded-lg bg-[#C2994B] px-5 py-3 font-semibold text-black transition hover:bg-[#d4aa5a] sm:w-auto"
         >
           Atualizar
         </button>
@@ -242,7 +242,7 @@ export default function RelatoriosPage() {
           Filtrar período
         </h2>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <div>
             <label className="mb-2 block text-sm text-gray-400">
               Data inicial
@@ -292,15 +292,15 @@ export default function RelatoriosPage() {
         <>
           {/* CARDS PRINCIPAIS */}
 
-            <div className="mb-8 grid gap-6 md:grid-cols-2 xl:grid-cols-6">
+            <div className="mb-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
             {/* CANCELAMENTOS */}
 
-            <div className="rounded-xl border border-red-500/30 bg-[#111] p-6">
+            <div className="rounded-xl border border-red-500/30 bg-[#111] p-4 sm:p-6">
               <p className="text-sm text-gray-400">
                 Cancelamentos
               </p>
 
-              <p className="mt-2 text-4xl font-bold text-red-500">
+              <p className="mt-2 break-words text-3xl font-bold text-red-500 sm:text-4xl">
                 {totalCancelados}
               </p>
 
@@ -340,7 +340,7 @@ export default function RelatoriosPage() {
                 Pendentes
               </p>
 
-              <p className="mt-2 text-4xl font-bold text-yellow-500">
+              <p className="mt-2 break-words text-3xl font-bold text-yellow-500 sm:text-4xl">
                 {totalPendentes}
               </p>
             </div>
@@ -433,18 +433,18 @@ export default function RelatoriosPage() {
                 Nenhum serviço encontrado.
               </p>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {servicosMaisAgendados.map(
                   ([servico, quantidade]) => (
                     <div
                       key={servico}
-                      className="flex items-center justify-between rounded-lg border border-white/10 bg-[#0b0b0b] p-4"
+                      className="flex flex-col gap-3 rounded-lg border border-white/10 bg-[#0b0b0b] p-4 sm:flex-row sm:items-center sm:justify-between"
                     >
                       <span className="text-white">
                         {servico}
                       </span>
 
-                      <span className="rounded-full bg-[#C2994B]/20 px-4 py-2 font-semibold text-[#C2994B]">
+                      <span className="rounded-full bg-[#C2994B]/20 px-4 py-2 text-center font-semibold text-[#C2994B]">
                         {quantidade} agendamento(s)
                       </span>
                     </div>
@@ -466,8 +466,8 @@ export default function RelatoriosPage() {
                 Nenhum agendamento encontrado.
               </p>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full">
+              <div className="overflow-x-auto pb-2">
+                <table className="w-full min-w-[640px]">
                   <thead>
                     <tr className="border-b border-white/10 text-left text-gray-400">
                       <th className="p-4">
@@ -499,7 +499,7 @@ export default function RelatoriosPage() {
                           key={agendamento.id}
                           className="border-b border-white/10"
                         >
-                          <td className="p-4 text-white">
+                          <td className="max-w-[180px] p-4 break-words text-white">
                             {agendamento.nome}
                           </td>
 

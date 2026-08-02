@@ -58,9 +58,9 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#070705] px-6 text-white">
+    <main className="flex min-h-screen items-center justify-center bg-[#070705] px-4 py-6 text-white sm:px-6">
 
-      <div className="w-full max-w-md rounded-2xl border border-[#C2994B]/20 bg-[#111] p-8 shadow-2xl">
+      <div className="w-full max-w-md rounded-2xl border border-[#C2994B]/20 bg-[#111] p-6 shadow-2xl sm:p-8">
 
         {/* LOGO */}
         <div className="mb-8 text-center">
@@ -69,7 +69,7 @@ export default function LoginPage() {
             B
           </div>
 
-          <h1 className="text-3xl font-bold text-[#C2994B]">
+          <h1 className="text-2xl font-bold text-[#C2994B] sm:text-3xl">
             Barber Dev
           </h1>
 

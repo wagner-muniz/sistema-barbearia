@@ -53,14 +53,14 @@ export default function AdminShell({
   ];
 
   return (
-    <div className="flex min-h-screen bg-[#070705] text-white">
-      <aside className="flex w-64 flex-col border-r border-[#C2994B]/20 bg-[#111]">
-        <div className="border-b border-[#C2994B]/20 p-6">
+    <div className="flex min-h-screen flex-col bg-[#070705] text-white lg:flex-row">
+      <aside className="w-full border-b border-[#C2994B]/20 bg-[#111] lg:w-64 lg:flex-shrink-0 lg:border-b-0 lg:border-r">
+        <div className="border-b border-[#C2994B]/20 p-4 sm:p-6">
           <h1 className="text-xl font-bold text-[#C2994B]">Barber Dev</h1>
           <p className="text-xs text-gray-400">Painel Administrativo</p>
         </div>
 
-        <nav className="flex-1 space-y-2 p-4">
+        <nav className="flex gap-2 overflow-x-auto p-3 sm:p-4 lg:flex-col lg:overflow-visible">
           {menu.map((item) => {
             const ativo = pathname === item.rota;
 
@@ -68,7 +68,7 @@ export default function AdminShell({
               <Link
                 key={item.rota}
                 href={item.rota}
-                className={`block rounded-lg px-4 py-3 transition ${
+                className={`whitespace-nowrap rounded-lg px-4 py-3 text-sm transition lg:block lg:text-base ${
                   ativo
                     ? "bg-[#C2994B] font-semibold text-black"
                     : "text-gray-300 hover:bg-[#222]"
@@ -91,13 +91,15 @@ export default function AdminShell({
         </div>
       </aside>
 
-      <main className="flex-1">
-        <header className="flex h-16 items-center justify-between border-b border-[#C2994B]/20 bg-[#111] px-8">
-          <h2 className="font-semibold text-white">Sistema de Agendamento</h2>
-          <span className="text-sm text-gray-400">Administrador</span>
+      <main className="flex-1 min-w-0">
+        <header className="flex h-16 items-center justify-between border-b border-[#C2994B]/20 bg-[#111] px-4 sm:px-6 lg:px-8">
+          <h2 className="text-sm font-semibold text-white sm:text-base">
+            Sistema de Agendamento
+          </h2>
+          <span className="text-xs text-gray-400 sm:text-sm">Administrador</span>
         </header>
 
-        <section className="p-8">{children}</section>
+        <section className="min-w-0 p-4 sm:p-6 lg:p-8">{children}</section>
       </main>
     </div>
   );

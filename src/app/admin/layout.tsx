@@ -86,7 +86,7 @@ export default function AdminLayout({
   ];
 
   return (
-    <div className="relative flex min-h-screen bg-[#070705] text-white">
+    <div className="relative flex min-h-screen overflow-x-hidden bg-[#070705] text-white">
       {menuAberto ? (
         <button
           type="button"
@@ -148,7 +148,7 @@ export default function AdminLayout({
         </div>
       </aside>
 
-      <main className="flex-1 lg:ml-0">
+      <main className="flex-1 min-w-0 overflow-x-hidden lg:ml-0">
         <header className="flex h-16 items-center justify-between border-b border-[#C2994B]/20 bg-[#111] px-4 sm:px-8">
           <div className="flex items-center gap-3">
             <button
@@ -167,7 +167,7 @@ export default function AdminLayout({
           <span className="text-sm text-gray-400">Administrador</span>
         </header>
 
-        <section className="p-8">{children}</section>
+        <section className="min-w-0 overflow-x-auto p-4 sm:p-6 lg:p-8">{children}</section>
       </main>
     </div>
   );

@@ -329,14 +329,14 @@ export default function AgendamentoPage() {
   }
 
   return (
-    <div className="min-h-screen overflow-hidden bg-[#070705] text-white">
-      <div className="mx-auto max-w-6xl px-6 py-10">
+    <div className="min-h-screen overflow-x-hidden bg-[#070705] text-white">
+      <div className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-6 lg:py-10">
 
-        <h1 className="mb-10 text-4xl font-bold text-[#C2994B]">
+        <h1 className="mb-6 text-3xl font-bold text-[#C2994B] sm:mb-8 sm:text-4xl">
           Agendamento
         </h1>
 
-        <div className="grid gap-8 rounded-3xl border border-white/10 bg-[#111] p-8 lg:grid-cols-2">
+        <div className="grid gap-6 rounded-3xl border border-white/10 bg-[#111] p-4 sm:p-6 lg:grid-cols-2 lg:gap-8 lg:p-8">
 
           {/* LADO ESQUERDO */}
 
@@ -476,13 +476,13 @@ export default function AgendamentoPage() {
             </h2>
 
             <div className="rounded-2xl border border-[#C2994B]/20 bg-[#111] p-4">
-              <div className="flex justify-center">
+              <div className="flex justify-center overflow-x-auto">
                 <DayPicker
                   mode="single"
                   selected={selected}
                   onSelect={setSelected}
                   locale={ptBR}
-                  className="text-white"
+                  className="w-full text-white"
                   modifiersStyles={{
                     selected: {
                       backgroundColor: "#C2994B",
