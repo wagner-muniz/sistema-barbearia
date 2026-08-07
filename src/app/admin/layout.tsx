@@ -90,14 +90,14 @@ export default function AdminLayout({
       {menuAberto ? (
         <button
           type="button"
-          className="fixed inset-0 z-40 bg-black/70 lg:hidden"
+          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
           onClick={() => setMenuAberto(false)}
           aria-label="Fechar menu"
         />
       ) : null}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-[#C2994B]/20 bg-[#111] transition-transform duration-300 lg:static lg:w-64 lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-[#C2994B]/20 bg-[#111] shadow-2xl shadow-black/40 transition-transform duration-300 lg:static lg:w-64 lg:translate-x-0 lg:shadow-none ${
           menuAberto ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -153,13 +153,15 @@ export default function AdminLayout({
           <div className="flex items-center gap-3">
             <button
               type="button"
-              className="rounded-lg border border-[#C2994B]/20 bg-[#111] p-2 text-white hover:bg-[#222] lg:hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#C2994B]/20 bg-[#111] text-white transition hover:bg-[#222] lg:hidden"
               onClick={() => setMenuAberto(true)}
               aria-label="Abrir menu"
             >
-              <span className="block h-0.5 w-6 bg-white" />
-              <span className="my-1 block h-0.5 w-6 bg-white" />
-              <span className="block h-0.5 w-6 bg-white" />
+              <div className="flex flex-col gap-1.5">
+                <span className="block h-0.5 w-5 bg-white" />
+                <span className="block h-0.5 w-5 bg-white" />
+                <span className="block h-0.5 w-5 bg-white" />
+              </div>
             </button>
             <h2 className="font-semibold text-white">Sistema de Agendamento</h2>
           </div>
