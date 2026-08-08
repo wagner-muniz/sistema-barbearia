@@ -83,7 +83,7 @@ export default function Home() {
               <a href="#equipe" onClick={() => setMenuAberto(false)} className="rounded-xl px-3 py-2 transition hover:bg-[#C2994B]/10">Equipe</a> 
               <a href="#avaliacoes" onClick={() => setMenuAberto(false)} className="rounded-xl px-3 py-2 transition hover:bg-[#C2994B]/10">Avaliações</a>
               <a href="#contato" onClick={() => setMenuAberto(false)} className="rounded-xl px-3 py-2 transition hover:bg-[#C2994B]/10">Contato</a>
-              <a href="https://wa.me/5511999999999" target="_blank" rel="noreferrer" onClick={() => setMenuAberto(false)} className="rounded-xl px-3 py-2 transition hover:bg-[#C2994B]/10">WhatsApp</a>
+              <a href="https://wa.me/77981001595" target="_blank" rel="noreferrer" onClick={() => setMenuAberto(false)} className="rounded-xl px-3 py-2 transition hover:bg-[#C2994B]/10">WhatsApp</a>
             </div>
           </div>
         </header>
@@ -247,8 +247,8 @@ export default function Home() {
               <div>
                 <h3 className="text-sm font-semibold uppercase tracking-[0.3em] text-[#C2994B]">Redes</h3>
                 <ul className="mt-3 space-y-2 text-sm text-white/70">
-                  <li><a href="https://www.instagram.com/SeuBarbeiro" target="_blank" rel="noreferrer" className="transition hover:text-[#C2994B]">Instagram</a></li>
-                  <li><a href="https://wa.me/5511999999999" target="_blank" rel="noreferrer" className="transition hover:text-[#C2994B]">WhatsApp</a></li>
+                  <li><a href="https://www.instagram.com/wagnermuniz__" target="_blank" rel="noreferrer" className="transition hover:text-[#C2994B]">Instagram</a></li>
+                  <li><a href="https://wa.me/77981001595" target="_blank" rel="noreferrer" className="transition hover:text-[#C2994B]">WhatsApp</a></li>
                 </ul>
               </div>
             </div>
