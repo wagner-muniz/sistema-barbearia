@@ -239,7 +239,7 @@ export default function Home() {
               <div>
                 <h3 className="text-sm font-semibold uppercase tracking-[0.3em] text-[#C2994B]">Contato</h3>
                 <ul className="mt-3 space-y-2 text-sm text-white/70">
-                  <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> (77) 9 9999-9999</li>
+                  <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> (77) 9 8100-1595</li>
                   <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Vitória da Conquista, BA</li>
                 </ul>
               </div>
